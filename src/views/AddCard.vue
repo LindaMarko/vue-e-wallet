@@ -1,11 +1,28 @@
 <template>
-  <main id="home">
-    <h1>E-wallet</h1>
+  <main id="new-card">
+    <h1>Add new card</h1>
+    <p>New card</p>
   </main>
 </template>
 
 <script>
-export default {}
+export default {
+  props: ["vendors"],
+}
 </script>
 
-<style></style>
+<style scoped lang="scss">
+#new-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 1.8rem;
+  }
+  p {
+    margin-bottom: 0.5rem;
+  }
+}
+</style>
