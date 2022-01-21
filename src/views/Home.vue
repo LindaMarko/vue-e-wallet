@@ -2,8 +2,14 @@
   <main id="home">
     <h1>E-wallet</h1>
     <p>Active card</p>
-    <Card v-if="activeCard" />
-    <CardList :saved="savedCards" @active="activateCard" />
+    <Card
+      :vendorName="activeCard.vendor"
+      :cardNumber="activeCard.cardNumber"
+      :cardholder="activeCard.cardholder"
+      :expireMonth="activeCard.expireMonth"
+      :expireYear="activeCard.expireYear"
+    />
+    <CardList :saved="saved" @active="activateCard;" />
     <button @click="$emit('changeView')">Add new card</button>
   </main>
 </template>
@@ -17,47 +23,15 @@ export default {
     Card,
     CardList,
   },
-  // props: ["view"],
+  props: ["saved"],
   data() {
     return {
-      activeCard: {
-        vendor: "Bitcoin Inc",
-        cardNumber: "1234 5678 9123 4567",
-        cardholder: "Marty McFly",
-        expireMonth: "09",
-        expireYear: "22",
-      },
-      savedCards: [
-        {
-          vendor: "Bitcoin Inc",
-          cardNumber: "1234 5678 9123 4567",
-          cardholder: "Marty McFly",
-          expireMonth: "09",
-          expireYear: "22",
-        },
-        {
-          vendor: "Ninja Bank",
-          cardNumber: "1266 8867 8999 2355",
-          cardholder: "Emmet Brown",
-          expireMonth: "06",
-          expireYear: "23",
-        },
-        {
-          vendor: "Block Chain Inc",
-          cardNumber: "7654 5668 9193 2367",
-          cardholder: "Lorraine McFly",
-          expireMonth: "11",
-          expireYear: "24",
-        },
-      ],
+      activeCard: {},
     }
   },
   methods: {
-    activateCard(cardNumber) {
-      this.activeCard = this.savedCards.filter(
-        (card) => card.cardNumber === cardNumber
-      )
-      console.log(this.activeCard)
+    activateCard(card) {
+      this.activeCard = card
     },
   },
 }
@@ -87,6 +61,7 @@ export default {
     border: 2px solid black;
     border-radius: 8px;
     background-color: white;
+    cursor: pointer;
   }
 }
 </style>

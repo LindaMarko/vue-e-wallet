@@ -4,9 +4,12 @@
       <Card
         v-for="card in saved"
         :key="card.vendor"
-        :savedCard="card"
-        :logo="logo"
-        @active="$emit('active', savedCard.cardNumber)"
+        :vendorName="card.vendor"
+        :cardNumber="card.cardNumber"
+        :cardholder="card.cardholder"
+        :expireMonth="card.expireMonth"
+        :expireYear="card.expireYear"
+        @active="$emit('active', card)"
       />
     </ul>
   </section>
@@ -16,7 +19,7 @@
 import Card from "./Card.vue"
 export default {
   components: { Card },
-  props: ["logo", "saved"],
+  props: ["saved"],
 }
 </script>
 

@@ -1,47 +1,54 @@
 <template>
-  <div
-    class="card-container"
-    :class="bgColor"
-    @click="$emit('activeCard', savedCard.cardNumber)"
-  >
-    <img
-      v-if="savedCard.vendor === 'Bitcoin Inc'"
-      src="../assets/bitcoin.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="savedCard.vendor === 'Ninja Bank'"
-      src="../assets/ninja.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="savedCard.vendor === 'Block Chain Inc'"
-      src="../assets/blockchain.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="savedCard.vendor === 'Evil Corp'"
-      src="../assets/blockchain.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
+  <div>
+    <div
+      class="card-container"
+      :class="{
+        bgbitcoin: vendorName === 'Bitcoin Inc',
+        bgninja: vendorName === 'Ninja Bank',
+        bgblockchain: vendorName === 'Block Chain Inc',
+        bgevil: vendorName === 'Evil Corp',
+      }"
+      @click="$emit('active', card)"
+    >
+      <img
+        v-if="vendorName === 'Bitcoin Inc'"
+        src="../assets/bitcoin.svg"
+        alt="Vendor logo"
+        class="vendor-logo"
+      />
+      <img
+        v-else-if="vendorName === 'Ninja Bank'"
+        src="../assets/ninja.svg"
+        alt="Vendor logo"
+        class="vendor-logo"
+      />
+      <img
+        v-else-if="vendorName === 'Block Chain Inc'"
+        src="../assets/blockchain.svg"
+        alt="Vendor logo"
+        class="vendor-logo"
+      />
+      <img
+        v-else-if="vendorName === 'Evil Corp'"
+        src="../assets/blockchain.svg"
+        alt="Vendor logo"
+        class="vendor-logo"
+      />
 
-    <div class="icons">
-      <img src="../assets/wifi.svg" alt="Wifi logo" class="wifi" />
-      <img src="../assets/chip.svg" alt="Chip" class="chip" />
-    </div>
-    <p class="card-number">{{ savedCard.cardNumber }}</p>
-    <div class="info">
-      <div class="name">
-        <p>Cardholder name</p>
-        <p>{{ savedCard.cardholder }}</p>
+      <div class="icons">
+        <img src="../assets/wifi.svg" alt="Wifi logo" class="wifi" />
+        <img src="../assets/chip.svg" alt="Chip" class="chip" />
       </div>
-      <div class="date">
-        <p>Valid until</p>
-        <p>{{ savedCard.expireMonth }} / {{ savedCard.expireYear }}</p>
+      <p class="card-number">{{ cardNumber }}</p>
+      <div class="info">
+        <div class="name">
+          <p>Cardholder name</p>
+          <p>{{ cardholder }}</p>
+        </div>
+        <div class="date">
+          <p>Valid until</p>
+          <p>{{ expireMonth }} / {{ expireYear }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -49,21 +56,27 @@
 
 <script>
 export default {
-  props: ["savedCard"],
+  props: [
+    "vendorName",
+    "cardNumber",
+    "cardholder",
+    "expireMonth",
+    "expireYear",
+  ],
   computed: {
-    bgColor() {
-      if (this.savedCard.vendor === "Bitcoin Inc") {
-        return "bg-bitcoin"
-      } else if (this.savedCard.vendor === "Ninja Bank") {
-        return "bg-ninja"
-      } else if (this.savedCard.vendor === "Block Chain Inc") {
-        return "bg-block-chain"
-      } else if (this.savedCard.vendor === "Evil Corp") {
-        return "bg-evil"
-      } else {
-        return "bg-grey"
-      }
-    },
+    // bgColor() {
+    //   if (this.savedCard.vendor === "Bitcoin Inc") {
+    //     return "bgbitcoin"
+    //   } else if (this.savedCard.vendor === "Ninja Bank") {
+    //     return "bgninja"
+    //   } else if (this.savedCard.vendor === "Block Chain Inc") {
+    //     return "bgblockchain"
+    //   } else if (this.savedCard.vendor === "Evil Corp") {
+    //     return "bgevil"
+    //   } else {
+    //     return "bggrey"
+    //   }
+    // },
   },
 }
 </script>
@@ -115,22 +128,22 @@ export default {
       font-size: 12px;
     }
   }
-  .bg-bitcoin {
+  .bgbitcoin {
     background-color: #ffae34;
   }
-  .bg-ninja {
+  .bgninja {
     background-color: #222;
     color: white;
   }
-  .bg-block-chain {
+  .bgblockchain {
     background-color: #8b58f9;
     color: white;
   }
-  .bg-evil {
+  .bgevil {
     background-color: #f33355;
     color: white;
   }
-  .bg-grey {
+  .bggrey {
     background-color: #d0d0d0;
   }
 }

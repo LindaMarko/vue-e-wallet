@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <Home v-if="currentView === 'home'" @changeView="changeToAddCard" />
-    <AddCard v-else-if="currentView === 'add-card'" />
+    <Home
+      v-if="currentView === 'home'"
+      :saved="savedCards"
+      @changeView="changeToAddCard"
+    />
+    <AddCard v-else-if="currentView === 'add-card'" @send="addNewCard" />
   </div>
 </template>
 
@@ -18,35 +22,43 @@ export default {
   data() {
     return {
       currentView: "home",
-
-      vendorsList: [
+      savedCards: [
         {
-          name: "Bitcoin Inc",
-          icon: require("./assets/bitcoin.svg"),
-          color: "#FFAE34",
+          vendor: "Bitcoin Inc",
+          cardNumber: "1234 5678 9123 4567",
+          cardholder: "Marty McFly",
+          expireMonth: "09",
+          expireYear: "22",
         },
         {
-          name: "Ninja Bank",
-          icon: require("./assets/ninja.svg"),
-          color: "#222",
+          vendor: "Ninja Bank",
+          cardNumber: "1266 8867 8999 2355",
+          cardholder: "Emmet Brown",
+          expireMonth: "06",
+          expireYear: "23",
         },
         {
-          name: "Block Chain Inc",
-          icon: require("./assets/blockchain.svg"),
-          color: "#8B58F9",
-        },
-        {
-          name: "Evil Corp",
-          icon: require("./assets/evil.svg"),
-          color: "#F33355",
+          vendor: "Block Chain Inc",
+          cardNumber: "7654 5668 9193 2367",
+          cardholder: "Lorraine McFly",
+          expireMonth: "11",
+          expireYear: "24",
         },
       ],
     }
   },
   methods: {
+    addNewCard(card) {
+      this.savedCards.push(card)
+      this.currentView = "home"
+      console.log(this.savedCards)
+    },
     changeToAddCard() {
       this.currentView = "add-card"
     },
+    // changeToHome() {
+    //   this.currentView = "home"
+    // },
   },
 }
 </script>
