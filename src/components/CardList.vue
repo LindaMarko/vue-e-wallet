@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-list {
-  margin-top: 3rem;
-}
+// .card-list {
+//   margin-top: 0.5rem;
+// }
 </style>

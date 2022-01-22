@@ -1,7 +1,7 @@
 <template>
   <section>
     <Card
-      :vendorName="newCard.vendor"
+      :vendorName="this.newCard.vendor"
       :cardNumber="this.newCard.cardNumber"
       :cardholder="this.newCard.cardholder"
       :expireMonth="this.newCard.expireMonth"
@@ -17,6 +17,7 @@
           id="card-number"
           name="card-number"
           v-model="newCard.cardNumber"
+          maxlength="16"
         />
       </div>
       <div class="input">
@@ -26,6 +27,7 @@
           id="cardholder"
           name="cardholder"
           v-model="newCard.cardholder"
+          maxlength="22"
         />
       </div>
       <div class="date">
@@ -59,15 +61,16 @@
       </div>
       <div class="input">
         <label for="vendor">Vendor</label>
-        <select name="vendor" id="vendor" v-model="newCard.vendor">
-          <option value="bitcoin">Bitcoin Inc</option>
-          <option value="ninja">Ninja Bank</option>
-          <option value="blockchain">Block Chain Inc</option>
-          <option value="evil">Evil Corp</option>
+        <select name="vendor" id="vendor" v-model.trim="newCard.vendor">
+          <option value="bitcoininc">Bitcoin Inc</option>
+          <option value="ninjabank">Ninja Bank</option>
+          <option value="blockchaininc">Block Chain Inc</option>
+          <option value="evilcorp">Evil Corp</option>
         </select>
       </div>
+      <button>Add card</button>
     </form>
-    <button>Add card</button>
+    <button class="back-btn" @click="$emit('back')">Back to cards</button>
   </section>
 </template>
 
@@ -75,15 +78,10 @@
 import Card from "./Card"
 export default {
   components: { Card },
-  props: [
-    "vendorName",
-    "cardNumber",
-    "cardholder",
-    "expireMonth",
-    "expireYear",
-  ],
   data() {
     return {
+      isCardNumberInvalid: false,
+      cardData: {},
       newCard: {
         vendor: "",
         cardNumber: "",
@@ -96,14 +94,18 @@ export default {
   methods: {
     sendData() {
       this.$emit("send", { ...this.newCard })
+      console.log(this.newCard)
     },
+    // validateCardNumber() {
+    //   if()
+    // }
   },
 }
 </script>
 
 <style scoped lang="scss">
 form {
-  width: 22rem;
+  width: 21rem;
 
   input,
   select {
@@ -152,5 +154,9 @@ button {
   border-radius: 8px;
   background-color: white;
   cursor: pointer;
+}
+.back-btn {
+  background-color: #222;
+  color: white;
 }
 </style>

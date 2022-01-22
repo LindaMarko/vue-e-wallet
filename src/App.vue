@@ -3,9 +3,16 @@
     <Home
       v-if="currentView === 'home'"
       :saved="savedCards"
+      :active="activeCard"
       @changeView="changeToAddCard"
+      @active="activateCard"
+      @delete="deleteCard"
     />
-    <AddCard v-else-if="currentView === 'add-card'" @send="addNewCard" />
+    <AddCard
+      v-else-if="currentView === 'add-card'"
+      @send="addNewCard"
+      @back="changeToHome"
+    />
   </div>
 </template>
 
@@ -13,6 +20,9 @@
 import Home from "./views/Home"
 import AddCard from "./views/AddCard"
 
+function persist(data) {
+  localStorage.setItem("currentCards", JSON.stringify(data))
+}
 export default {
   name: "App",
   components: {
@@ -45,6 +55,19 @@ export default {
           expireYear: "24",
         },
       ],
+      activeCard: {
+        vendor: "Bitcoin Inc",
+        cardNumber: "1234 5678 9123 4567",
+        cardholder: "Marty McFly",
+        expireMonth: "09",
+        expireYear: "22",
+      },
+    }
+  },
+  created() {
+    let persistedData = localStorage.getItem("currentCards")
+    if (persistedData) {
+      this.savedCards = JSON.parse(persistedData)
     }
   },
   methods: {
@@ -52,13 +75,25 @@ export default {
       this.savedCards.push(card)
       this.currentView = "home"
       console.log(this.savedCards)
+      persist(this.savedCards)
+    },
+    deleteCard() {
+      this.savedCards = this.savedCards.filter(
+        (card) => card.cardNumber != this.activeCard.cardNumber
+      )
+      persist(this.savedCards)
+      this.activeCard = {}
+      console.log(this.savedCards)
     },
     changeToAddCard() {
       this.currentView = "add-card"
     },
-    // changeToHome() {
-    //   this.currentView = "home"
-    // },
+    changeToHome() {
+      this.currentView = "home"
+    },
+    activateCard(card) {
+      this.activeCard = card
+    },
   },
 }
 </script>
@@ -85,7 +120,7 @@ h3 {
   font-family: "Source Sans Pro", sans-serif;
 }
 #app {
-  width: 25rem;
+  width: 24rem;
   margin-top: 60px;
   display: flex;
   justify-content: center;

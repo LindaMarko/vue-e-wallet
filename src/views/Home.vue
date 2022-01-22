@@ -3,35 +3,48 @@
     <h1>E-wallet</h1>
     <p>Active card</p>
     <Card
-      :vendorName="activeCard.vendor"
-      :cardNumber="activeCard.cardNumber"
-      :cardholder="activeCard.cardholder"
-      :expireMonth="activeCard.expireMonth"
-      :expireYear="activeCard.expireYear"
+      :vendorName="active.vendor"
+      :cardNumber="active.cardNumber"
+      :cardholder="active.cardholder"
+      :expireMonth="active.expireMonth"
+      :expireYear="active.expireYear"
     />
-    <CardList :saved="saved" @active="activateCard;" />
+    <p class="all-cards">All cards</p>
+    <CardList :saved="saved" @active="activeCard" />
     <button @click="$emit('changeView')">Add new card</button>
+    <button @click="showDialog = true" class="delete-btn">
+      Delete active card
+    </button>
+    <DeleteCardDialog
+      v-if="showDialog"
+      @close="showDialog = false"
+      @delete="$emit('delete')"
+    />
   </main>
 </template>
 
 <script>
 import Card from "../components/Card"
 import CardList from "../components/CardList"
+import DeleteCardDialog from "../components/DeleteCardDialog"
 
 export default {
   components: {
     Card,
     CardList,
+    DeleteCardDialog,
   },
-  props: ["saved"],
+  props: ["saved", "active"],
   data() {
     return {
-      activeCard: {},
+      showDialog: false,
+      activeCardData: {},
     }
   },
   methods: {
-    activateCard(card) {
-      this.activeCard = card
+    activeCard(card) {
+      this.activeCardData = card
+      this.$emit("active", this.activeCardData)
     },
   },
 }
@@ -62,6 +75,13 @@ export default {
     border-radius: 8px;
     background-color: white;
     cursor: pointer;
+  }
+  .all-cards {
+    margin-top: 2rem;
+  }
+  .delete-btn {
+    background-color: #222;
+    color: white;
   }
 }
 </style>

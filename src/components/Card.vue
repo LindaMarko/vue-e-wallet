@@ -1,54 +1,47 @@
 <template>
-  <div>
-    <div
-      class="card-container"
-      :class="{
-        bgbitcoin: vendorName === 'Bitcoin Inc',
-        bgninja: vendorName === 'Ninja Bank',
-        bgblockchain: vendorName === 'Block Chain Inc',
-        bgevil: vendorName === 'Evil Corp',
-      }"
-      @click="$emit('active', card)"
-    >
-      <img
-        v-if="vendorName === 'Bitcoin Inc'"
-        src="../assets/bitcoin.svg"
-        alt="Vendor logo"
-        class="vendor-logo"
-      />
-      <img
-        v-else-if="vendorName === 'Ninja Bank'"
-        src="../assets/ninja.svg"
-        alt="Vendor logo"
-        class="vendor-logo"
-      />
-      <img
-        v-else-if="vendorName === 'Block Chain Inc'"
-        src="../assets/blockchain.svg"
-        alt="Vendor logo"
-        class="vendor-logo"
-      />
-      <img
-        v-else-if="vendorName === 'Evil Corp'"
-        src="../assets/blockchain.svg"
-        alt="Vendor logo"
-        class="vendor-logo"
-      />
+  <div
+    class="card-container"
+    :style="{ background: bgColor }"
+    @click="$emit('active')"
+  >
+    <img
+      v-if="vendorName === 'Bitcoin Inc'"
+      src="../assets/bitcoin.svg"
+      alt="Vendor logo"
+      class="vendor-logo"
+    />
+    <img
+      v-else-if="vendorName === 'Ninja Bank'"
+      src="../assets/ninja.svg"
+      alt="Vendor logo"
+      class="vendor-logo"
+    />
+    <img
+      v-else-if="vendorName === 'Block Chain Inc'"
+      src="../assets/blockchain.svg"
+      alt="Vendor logo"
+      class="vendor-logo"
+    />
+    <img
+      v-else-if="vendorName === 'Evil Corp'"
+      src="../assets/blockchain.svg"
+      alt="Vendor logo"
+      class="vendor-logo"
+    />
 
-      <div class="icons">
-        <img src="../assets/wifi.svg" alt="Wifi logo" class="wifi" />
-        <img src="../assets/chip.svg" alt="Chip" class="chip" />
+    <div class="icons">
+      <img src="../assets/wifi.svg" alt="Wifi logo" class="wifi" />
+      <img src="../assets/chip.svg" alt="Chip" class="chip" />
+    </div>
+    <p class="card-number">{{ cardNumber }}</p>
+    <div class="info">
+      <div class="name">
+        <p>Cardholder name</p>
+        <p>{{ cardholder }}</p>
       </div>
-      <p class="card-number">{{ cardNumber }}</p>
-      <div class="info">
-        <div class="name">
-          <p>Cardholder name</p>
-          <p>{{ cardholder }}</p>
-        </div>
-        <div class="date">
-          <p>Valid until</p>
-          <p>{{ expireMonth }} / {{ expireYear }}</p>
-        </div>
+      <div class="date">
+        <p>Valid until</p>
+        <p>{{ expireMonth }} / {{ expireYear }}</p>
       </div>
     </div>
   </div>
@@ -64,19 +57,19 @@ export default {
     "expireYear",
   ],
   computed: {
-    // bgColor() {
-    //   if (this.savedCard.vendor === "Bitcoin Inc") {
-    //     return "bgbitcoin"
-    //   } else if (this.savedCard.vendor === "Ninja Bank") {
-    //     return "bgninja"
-    //   } else if (this.savedCard.vendor === "Block Chain Inc") {
-    //     return "bgblockchain"
-    //   } else if (this.savedCard.vendor === "Evil Corp") {
-    //     return "bgevil"
-    //   } else {
-    //     return "bggrey"
-    //   }
-    // },
+    bgColor() {
+      if (this.vendorName === "bitcoin inc") {
+        return "bgbitcoin"
+      } else if (this.vendorName === "ninja bank") {
+        return "bgninja"
+      } else if (this.vendorName === "Block Chain Inc") {
+        return "bgblockchain"
+      } else if (this.vendorName === "Evil Corp") {
+        return "bgevil"
+      } else {
+        return "bggrey"
+      }
+    },
   },
 }
 </script>
