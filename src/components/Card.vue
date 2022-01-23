@@ -1,5 +1,5 @@
 <template>
-  <div
+  <li
     class="card-container"
     :class="bgColor"
     :style="[{ zIndex: layerIndex }, getMargin]"
@@ -29,12 +29,14 @@
       alt="Vendor logo"
       class="vendor-logo"
     />
+    <p v-else class="vendor-logo">Vendor logo</p>
 
     <div class="icons">
       <img src="../assets/wifi_white.svg" alt="Wifi logo" class="wifi" />
       <img src="../assets/chip.svg" alt="Chip" class="chip" />
     </div>
-    <p class="card-number">{{ cardNumber }}</p>
+    <p class="card-number" v-if="cardNumber">{{ formatCardNumber }}</p>
+    <p class="card-number" v-else>Card number</p>
     <div class="info">
       <div class="name">
         <p>Cardholder name</p>
@@ -45,7 +47,7 @@
         <p>{{ expireMonth }} / {{ expireYear }}</p>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -75,6 +77,20 @@ export default {
     },
     getMargin() {
       return this.layerIndex === 0 ? 0 : this.margin
+    },
+    formatCardNumber() {
+      let formattedNum = ""
+      if (this.cardNumber) {
+        for (let i = 0; i < this.cardNumber.length; i++) {
+          if (i % 4 === 0) {
+            formattedNum = formattedNum + " " + this.cardNumber[i]
+          } else {
+            formattedNum += this.cardNumber[i]
+          }
+        }
+      }
+
+      return formattedNum
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fade-layer"></div>
+    <div class="fade-layer" @click="cancelDelete"></div>
     <dialog open @click="cancelDelete">
       <h2>You are going to delete the active card. Are you sure?</h2>
       <button @click="$emit('delete')">Yes</button>
@@ -38,7 +38,7 @@ dialog {
   position: fixed;
   top: 20vh;
   left: 35%;
-  width: 30%;
+  width: 22rem;
   z-index: 100;
   border-radius: 12px;
   border: none;
@@ -53,7 +53,7 @@ h2 {
   margin-bottom: 1rem;
 }
 button {
-  width: 40%;
+  width: 90%;
   padding: 0.8rem;
   margin-top: 0.8rem;
   font-size: 1rem;

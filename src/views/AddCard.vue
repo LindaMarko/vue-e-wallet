@@ -2,7 +2,7 @@
   <main id="new-card">
     <h1>Add new card</h1>
     <p>New card</p>
-    <CardForm @send="sendData" @back="$emit('back')" />
+    <CardForm @send="sendData" @back="$emit('back')" :saved="saved" />
   </main>
 </template>
 
@@ -10,6 +10,7 @@
 import CardForm from "../components/CardForm"
 export default {
   components: { CardForm },
+  props: ["saved"],
   data() {
     return {
       newCardData: {},

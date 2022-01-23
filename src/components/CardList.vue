@@ -24,7 +24,7 @@ export default {
   props: ["saved"],
   data() {
     return {
-      cardMargin: { marginTop: "-10rem" },
+      cardMargin: { marginTop: "-11rem" },
     }
   },
 }

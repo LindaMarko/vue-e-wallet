@@ -10,6 +10,7 @@
     />
     <AddCard
       v-else-if="currentView === 'add-card'"
+      :saved="savedCards"
       @send="addNewCard"
       @back="changeToHome"
     />
@@ -32,36 +33,8 @@ export default {
   data() {
     return {
       currentView: "home",
-      savedCards: [
-        {
-          vendor: "Bitcoin Inc",
-          cardNumber: "1234 5678 9123 4567",
-          cardholder: "Marty McFly",
-          expireMonth: "09",
-          expireYear: "22",
-        },
-        {
-          vendor: "Ninja Bank",
-          cardNumber: "1266 8867 8999 2355",
-          cardholder: "Emmet Brown",
-          expireMonth: "06",
-          expireYear: "23",
-        },
-        {
-          vendor: "Block Chain Inc",
-          cardNumber: "7654 5668 9193 2367",
-          cardholder: "Lorraine McFly",
-          expireMonth: "11",
-          expireYear: "24",
-        },
-      ],
-      activeCard: {
-        vendor: "Bitcoin Inc",
-        cardNumber: "1234 5678 9123 4567",
-        cardholder: "Marty McFly",
-        expireMonth: "09",
-        expireYear: "22",
-      },
+      savedCards: [],
+      activeCard: {},
     }
   },
   created() {
@@ -82,8 +55,8 @@ export default {
         (card) => card.cardNumber != this.activeCard.cardNumber
       )
       persist(this.savedCards)
+      localStorage.removeItem(this.activeCard)
       this.activeCard = {}
-      console.log(this.savedCards)
     },
     changeToAddCard() {
       this.currentView = "add-card"
@@ -111,7 +84,7 @@ body {
   justify-content: center;
   font-family: "PT Mono", monospace;
   font-size: 16px;
-  background-color: lightblue;
+  background-color: rgb(226, 225, 225);
   text-transform: uppercase;
 }
 h1,
@@ -121,10 +94,11 @@ h3 {
 }
 #app {
   width: 24rem;
-  margin-top: 60px;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   background-color: white;
   padding: 2rem;
+  border-radius: 5px;
 }
 </style>

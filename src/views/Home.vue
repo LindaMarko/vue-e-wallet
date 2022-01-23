@@ -9,8 +9,12 @@
       :expireMonth="active.expireMonth"
       :expireYear="active.expireYear"
     />
+    <p v-if="saved.length > 0" class="active-text">
+      👇 Click on a card to make it active.
+    </p>
     <p class="all-cards">All cards</p>
     <CardList :saved="saved" @active="activeCard" />
+
     <button @click="$emit('changeView')">Add new card</button>
     <button @click="showDialog = true" class="delete-btn">
       Delete active card
@@ -66,7 +70,7 @@ export default {
   button {
     width: 100%;
     padding: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     font-size: 1rem;
     font-weight: bold;
     font-family: inherit;
@@ -78,6 +82,9 @@ export default {
   }
   .all-cards {
     margin-top: 2rem;
+  }
+  .active-text {
+    font-size: 0.6rem;
   }
   .delete-btn {
     background-color: #222;
