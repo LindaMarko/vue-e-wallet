@@ -1,7 +1,8 @@
 <template>
   <div
     class="card-container"
-    :style="{ background: bgColor }"
+    :class="bgColor"
+    :style="[{ zIndex: layerIndex }, getMargin]"
     @click="$emit('active')"
   >
     <img
@@ -24,13 +25,13 @@
     />
     <img
       v-else-if="vendorName === 'Evil Corp'"
-      src="../assets/blockchain.svg"
+      src="../assets/evil.svg"
       alt="Vendor logo"
       class="vendor-logo"
     />
 
     <div class="icons">
-      <img src="../assets/wifi.svg" alt="Wifi logo" class="wifi" />
+      <img src="../assets/wifi_white.svg" alt="Wifi logo" class="wifi" />
       <img src="../assets/chip.svg" alt="Chip" class="chip" />
     </div>
     <p class="card-number">{{ cardNumber }}</p>
@@ -55,20 +56,25 @@ export default {
     "cardholder",
     "expireMonth",
     "expireYear",
+    "layerIndex",
+    "margin",
   ],
   computed: {
     bgColor() {
-      if (this.vendorName === "bitcoin inc") {
-        return "bgbitcoin"
-      } else if (this.vendorName === "ninja bank") {
-        return "bgninja"
+      if (this.vendorName === "Bitcoin Inc") {
+        return "bg-bitcoin"
+      } else if (this.vendorName === "Ninja Bank") {
+        return "bg-ninja"
       } else if (this.vendorName === "Block Chain Inc") {
-        return "bgblockchain"
+        return "bg-blockchain"
       } else if (this.vendorName === "Evil Corp") {
-        return "bgevil"
+        return "bg-evil"
       } else {
-        return "bggrey"
+        return "bg-grey"
       }
+    },
+    getMargin() {
+      return this.layerIndex === 0 ? 0 : this.margin
     },
   },
 }
@@ -78,26 +84,24 @@ export default {
 .card-container {
   display: flex;
   flex-direction: column;
-  width: 380px;
+  position: relative;
+  width: 370px;
   height: 240px;
-  padding: 0.1rem 1rem;
-  background: linear-gradient(
-      248.3deg,
-      rgba(255, 255, 255, 0.24) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #d0d0d0;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 1rem;
+  background: #d0d0d0;
+  box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.94);
   border-radius: 8px;
   margin-bottom: 1rem;
+
   .vendor-logo {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     align-self: flex-end;
   }
   .icons {
     display: flex;
     flex-direction: column;
+    transform: translateY(-1.2rem);
 
     .wifi {
       width: 44px;
@@ -110,7 +114,6 @@ export default {
   }
   .card-number {
     font-size: 1.5rem;
-    margin-top: 0.7rem;
   }
   .info {
     display: flex;
@@ -121,23 +124,23 @@ export default {
       font-size: 12px;
     }
   }
-  .bgbitcoin {
-    background-color: #ffae34;
-  }
-  .bgninja {
-    background-color: #222;
-    color: white;
-  }
-  .bgblockchain {
-    background-color: #8b58f9;
-    color: white;
-  }
-  .bgevil {
-    background-color: #f33355;
-    color: white;
-  }
-  .bggrey {
-    background-color: #d0d0d0;
-  }
+}
+.bg-bitcoin {
+  background-color: #ffae34;
+}
+.bg-ninja {
+  background-color: #222;
+  color: white;
+}
+.bg-blockchain {
+  background-color: #8b58f9;
+  color: white;
+}
+.bg-evil {
+  background-color: #f33355;
+  color: white;
+}
+.bg-grey {
+  background-color: #d0d0d0;
 }
 </style>

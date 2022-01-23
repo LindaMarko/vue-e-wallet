@@ -3,12 +3,14 @@
     <ul>
       <Card
         v-for="card in saved"
-        :key="card.vendor"
+        :key="card.cardNumber"
         :vendorName="card.vendor"
         :cardNumber="card.cardNumber"
         :cardholder="card.cardholder"
         :expireMonth="card.expireMonth"
         :expireYear="card.expireYear"
+        :layerIndex="saved.indexOf(card)"
+        :margin="cardMargin"
         @active="$emit('active', card)"
       />
     </ul>
@@ -20,11 +22,12 @@ import Card from "./Card.vue"
 export default {
   components: { Card },
   props: ["saved"],
+  data() {
+    return {
+      cardMargin: { marginTop: "-10rem" },
+    }
+  },
 }
 </script>
 
-<style scoped lang="scss">
-// .card-list {
-//   margin-top: 0.5rem;
-// }
-</style>
+<style scoped lang="scss"></style>

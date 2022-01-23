@@ -5,9 +5,9 @@
 <path d="M36.9488 32.1209C35.5166 32.1209 34.3555 30.9598 34.3555 29.5276C34.3555 28.0954 35.5166 26.9343 36.9488 26.9343C38.381 26.9343 39.5421 28.0954 39.5421 29.5276C39.5421 30.9598 38.381 32.1209 36.9488 32.1209Z" fill="white"/>
 <path d="M27.1019 32.1209C25.6697 32.1209 24.5087 30.9598 24.5087 29.5276C24.5087 28.0954 25.6697 26.9343 27.1019 26.9343C28.5341 26.9343 29.6952 28.0954 29.6952 29.5276C29.6952 30.9598 28.5341 32.1209 27.1019 32.1209Z" fill="white"/>
 <defs>
-<linearGradient id="paint0_linear_45_3" x1="64" y1="-5.76943e-06" x2="-13.2374" y2="30.7422" gradientUnits="userSpaceOnUse">
+<!-- <linearGradient id="paint0_linear_45_3" x1="64" y1="-5.76943e-06" x2="-13.2374" y2="30.7422" gradientUnits="userSpaceOnUse">
 <stop stop-color="white"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
-</linearGradient>
+</linearGradient> -->
 </defs>
 </svg>

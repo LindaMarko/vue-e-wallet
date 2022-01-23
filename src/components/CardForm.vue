@@ -62,10 +62,10 @@
       <div class="input">
         <label for="vendor">Vendor</label>
         <select name="vendor" id="vendor" v-model.trim="newCard.vendor">
-          <option value="bitcoininc">Bitcoin Inc</option>
-          <option value="ninjabank">Ninja Bank</option>
-          <option value="blockchaininc">Block Chain Inc</option>
-          <option value="evilcorp">Evil Corp</option>
+          <option value="Bitcoin Inc">Bitcoin Inc</option>
+          <option value="Ninja Bank">Ninja Bank</option>
+          <option value="Block Chain Inc">Block Chain Inc</option>
+          <option value="Evil Corp">Evil Corp</option>
         </select>
       </div>
       <button>Add card</button>
