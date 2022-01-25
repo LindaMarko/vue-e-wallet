@@ -84,7 +84,7 @@ body {
   justify-content: center;
   font-family: "PT Mono", monospace;
   font-size: 16px;
-  background-color: rgb(226, 225, 225);
+  background-color: rgb(8, 8, 8);
   text-transform: uppercase;
 }
 h1,

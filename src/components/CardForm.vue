@@ -9,9 +9,10 @@
     />
     <form @submit.prevent="sendData">
       <div class="input">
-        <label for="card-number" placeholder="XXXX XXXX XXXX XXXX"
-          >Card number<span class="star">*</span></label
-        >
+        <label for="card-number">Card number<span class="star">*</span></label>
+        <p v-if="isCardNumberInvalid" class="data-invalid">
+          Card number can contain only numbers.
+        </p>
         <p v-if="isCardNumberDuplicate" class="data-invalid">
           This card number is already registered.
         </p>
@@ -22,10 +23,7 @@
           v-model="newCard.cardNumber"
           @input="validateCardNumber"
           maxlength="16"
-          inputmode="numeric"
         />
-
-        <!-- <p class="data-invalid">Card number can contain only numbers.</p> -->
       </div>
       <div class="input">
         <label for="cardholder"
@@ -128,16 +126,21 @@ export default {
       ) {
         this.isCardNumberDuplicate = true
       }
-      //   const number = "0123456789"
-      //   if (!number.includes(this.newCard.cardNumber)) {
-      //     this.isCardNumberInvalid = true
-      //   }
-      //   if (this.newCard.cardNumber === "") {
-      //     this.isCardNumberInvalid = false
-      //   }
-      //   console.log(this.newCard.cardNumber)
-      // },
+      // const number = "0123456789"
+      // if (!number.includes(this.newCard.cardNumber)) {
+      //   this.isCardNumberInvalid = true
+      // } else if (this.newCard.cardNumber === "") {
+      //   this.isCardNumberInvalid = false
+      // }
     },
+    // validateCardholder() {
+    //   const letters = "abcdfghjklmnpqrstvxyzABCDFGHJKLMNPQRSTVXYZ"
+    //   if (!letters.includes(this.newCard.cardNumber)) {
+    //     this.isCardNumberInvalid = true
+    //   } else if (this.newCard.cardNumber === "") {
+    //     this.isCardNumberInvalid = false
+    //   }
+    // },
   },
 }
 </script>

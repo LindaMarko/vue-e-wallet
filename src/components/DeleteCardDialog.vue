@@ -37,7 +37,7 @@ dialog {
   align-items: center;
   position: fixed;
   top: 20vh;
-  left: 35%;
+  left: 40%;
   width: 22rem;
   z-index: 100;
   border-radius: 12px;

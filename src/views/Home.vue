@@ -12,7 +12,7 @@
     <p v-if="saved.length > 0" class="active-text">
       👇 Click on a card to make it active.
     </p>
-    <p class="all-cards">All cards</p>
+    <p v-if="this.saved.length > 0" class="all-cards">All cards</p>
     <CardList :saved="saved" @active="activeCard" />
 
     <button @click="$emit('changeView')">Add new card</button>

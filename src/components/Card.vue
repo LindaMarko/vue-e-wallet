@@ -36,11 +36,12 @@
       <img src="../assets/chip.svg" alt="Chip" class="chip" />
     </div>
     <p class="card-number" v-if="cardNumber">{{ formatCardNumber }}</p>
-    <p class="card-number" v-else>Card number</p>
+    <p class="card-number" v-else>XXXX XXXX XXXX XXXX</p>
     <div class="info">
       <div class="name">
         <p>Cardholder name</p>
-        <p>{{ cardholder }}</p>
+        <p v-if="cardholder">{{ cardholder }}</p>
+        <p v-else>Firstname lastname</p>
       </div>
       <div class="date">
         <p>Valid until</p>
