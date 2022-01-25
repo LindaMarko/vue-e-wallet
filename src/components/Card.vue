@@ -6,31 +6,12 @@
     @click="$emit('active')"
   >
     <img
-      v-if="vendorName === 'Bitcoin Inc'"
-      src="../assets/bitcoin.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="vendorName === 'Ninja Bank'"
-      src="../assets/ninja.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="vendorName === 'Block Chain Inc'"
-      src="../assets/blockchain.svg"
-      alt="Vendor logo"
-      class="vendor-logo"
-    />
-    <img
-      v-else-if="vendorName === 'Evil Corp'"
-      src="../assets/evil.svg"
+      :src="getVendor"
+      v-if="vendorName"
       alt="Vendor logo"
       class="vendor-logo"
     />
     <p v-else class="vendor-logo">Vendor logo</p>
-
     <div class="icons">
       <img src="../assets/wifi_white.svg" alt="Wifi logo" class="wifi" />
       <img src="../assets/chip.svg" alt="Chip" class="chip" />
@@ -53,28 +34,21 @@
 
 <script>
 export default {
-  props: [
-    "vendorName",
-    "cardNumber",
-    "cardholder",
-    "expireMonth",
-    "expireYear",
-    "layerIndex",
-    "margin",
-  ],
+  props: {
+    vendorName: String,
+    cardNumber: String,
+    cardholder: String,
+    expireMonth: String,
+    expireYear: String,
+    layerIndex: Number,
+    margin: Object,
+  },
   computed: {
+    getVendor() {
+      return require(`../assets/${this.vendorName}.svg`)
+    },
     bgColor() {
-      if (this.vendorName === "Bitcoin Inc") {
-        return "bg-bitcoin"
-      } else if (this.vendorName === "Ninja Bank") {
-        return "bg-ninja"
-      } else if (this.vendorName === "Block Chain Inc") {
-        return "bg-blockchain"
-      } else if (this.vendorName === "Evil Corp") {
-        return "bg-evil"
-      } else {
-        return "bg-grey"
-      }
+      return `bg-${this.vendorName}`
     },
     getMargin() {
       return this.layerIndex === 0 ? 0 : this.margin
@@ -156,8 +130,5 @@ export default {
 .bg-evil {
   background-color: #f33355;
   color: white;
-}
-.bg-grey {
-  background-color: #d0d0d0;
 }
 </style>

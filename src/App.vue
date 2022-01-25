@@ -47,7 +47,6 @@ export default {
     addNewCard(card) {
       this.savedCards.push(card)
       this.currentView = "home"
-      console.log(this.savedCards)
       persist(this.savedCards)
     },
     deleteCard() {

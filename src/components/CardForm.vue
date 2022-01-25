@@ -68,10 +68,10 @@
       <div class="input">
         <label for="vendor">Vendor<span class="star">*</span></label>
         <select name="vendor" id="vendor" v-model.trim="newCard.vendor">
-          <option value="Bitcoin Inc">Bitcoin Inc</option>
-          <option value="Ninja Bank">Ninja Bank</option>
-          <option value="Block Chain Inc">Block Chain Inc</option>
-          <option value="Evil Corp">Evil Corp</option>
+          <option value="bitcoin">Bitcoin Inc</option>
+          <option value="ninja">Ninja Bank</option>
+          <option value="blockchain">Block Chain Inc</option>
+          <option value="evil">Evil Corp</option>
         </select>
       </div>
       <p v-if="isCardDataInvalid" class="data-invalid">
@@ -126,21 +126,7 @@ export default {
       ) {
         this.isCardNumberDuplicate = true
       }
-      // const number = "0123456789"
-      // if (!number.includes(this.newCard.cardNumber)) {
-      //   this.isCardNumberInvalid = true
-      // } else if (this.newCard.cardNumber === "") {
-      //   this.isCardNumberInvalid = false
-      // }
     },
-    // validateCardholder() {
-    //   const letters = "abcdfghjklmnpqrstvxyzABCDFGHJKLMNPQRSTVXYZ"
-    //   if (!letters.includes(this.newCard.cardNumber)) {
-    //     this.isCardNumberInvalid = true
-    //   } else if (this.newCard.cardNumber === "") {
-    //     this.isCardNumberInvalid = false
-    //   }
-    // },
   },
 }
 </script>
