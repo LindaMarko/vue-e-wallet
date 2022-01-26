@@ -100,7 +100,7 @@ h3 {
   padding: 2rem;
   border-radius: 5px;
 }
-@media (max-width: 450px) {
+@media (max-width: 400px) {
   #app {
     width: 21.5rem;
   }

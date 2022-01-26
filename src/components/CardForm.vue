@@ -135,7 +135,7 @@ export default {
       }
     },
     validateCardholder() {
-      const letters = /^[a-z][a-z\s]*$/
+      const letters = /^[a-zA-Z\s]*$/
       if (!this.newCard.cardholder.match(letters)) {
         this.isCardholderInvalid = true
       }
