@@ -11,7 +11,7 @@
       <div class="input">
         <label for="card-number">Card number<span class="star">*</span></label>
         <p v-if="isCardNumberInvalid" class="data-invalid">
-          Card number can contain only numbers.
+          Card number contains only numbers.
         </p>
         <p v-if="isCardNumberDuplicate" class="data-invalid">
           This card number is already registered.
@@ -20,26 +20,40 @@
           type="text"
           id="card-number"
           name="card-number"
+          required
           v-model="newCard.cardNumber"
           @input="validateCardNumber"
           maxlength="16"
+          minlength="16"
+          inputmode="numeric"
         />
       </div>
       <div class="input">
         <label for="cardholder"
           >Cardholder name<span class="star">*</span></label
         >
+        <p v-if="isCardholderInvalid" class="data-invalid">
+          The cardholders name cannot contain numbers.
+        </p>
         <input
           type="text"
           id="cardholder"
           name="cardholder"
+          required
           v-model="newCard.cardholder"
+          @input="validateCardholder"
+          maxlength="22"
         />
       </div>
       <div class="date">
         <div class="month">
           <label for="month">Month<span class="star">*</span></label>
-          <select name="month" id="month" v-model="newCard.expireMonth">
+          <select
+            name="month"
+            id="month"
+            required
+            v-model="newCard.expireMonth"
+          >
             <option value="01">01</option>
             <option value="02">02</option>
             <option value="03">03</option>
@@ -56,7 +70,7 @@
         </div>
         <div class="year">
           <label for="year">Year<span class="star">*</span></label>
-          <select name="year" id="year" v-model="newCard.expireYear">
+          <select name="year" id="year" required v-model="newCard.expireYear">
             <option value="21">21</option>
             <option value="22">22</option>
             <option value="23">23</option>
@@ -67,16 +81,13 @@
       </div>
       <div class="input">
         <label for="vendor">Vendor<span class="star">*</span></label>
-        <select name="vendor" id="vendor" v-model.trim="newCard.vendor">
+        <select name="vendor" id="vendor" required v-model="newCard.vendor">
           <option value="bitcoin">Bitcoin Inc</option>
           <option value="ninja">Ninja Bank</option>
           <option value="blockchain">Block Chain Inc</option>
           <option value="evil">Evil Corp</option>
         </select>
       </div>
-      <p v-if="isCardDataInvalid" class="data-invalid">
-        Please fill out every input field.
-      </p>
       <button>Add card</button>
     </form>
     <button class="back-btn" @click="$emit('back')">Back to cards</button>
@@ -90,9 +101,9 @@ export default {
   props: ["saved"],
   data() {
     return {
-      isCardDataInvalid: false,
       isCardNumberInvalid: false,
       isCardNumberDuplicate: false,
+      isCardholderInvalid: false,
       cardData: {},
       newCard: {
         vendor: "",
@@ -105,18 +116,7 @@ export default {
   },
   methods: {
     sendData() {
-      if (
-        this.newCard.vendor === "" ||
-        this.newCard.cardNumber === "" ||
-        this.newCard.cardholder === "" ||
-        this.newCard.expireMonth === "" ||
-        this.newCard.expireYear === ""
-      ) {
-        this.isCardDataInvalid = true
-      } else {
-        this.$emit("send", { ...this.newCard })
-        console.log(this.newCard)
-      }
+      this.$emit("send", { ...this.newCard })
     },
     validateCardNumber() {
       if (this.newCard.cardNumber.length < 16) {
@@ -126,6 +126,22 @@ export default {
       ) {
         this.isCardNumberDuplicate = true
       }
+      const numbers = /^[0-9]+$/
+      if (!this.newCard.cardNumber.match(numbers)) {
+        this.isCardNumberInvalid = true
+      }
+      if (this.newCard.cardNumber === "") {
+        this.isCardNumberInvalid = false
+      }
+    },
+    validateCardholder() {
+      const letters = /^[a-z][a-z\s]*$/
+      if (!this.newCard.cardholder.match(letters)) {
+        this.isCardholderInvalid = true
+      }
+      if (this.newCard.cardholder === "") {
+        this.isCardholderInvalid = false
+      }
     },
   },
 }
@@ -134,6 +150,7 @@ export default {
 <style scoped lang="scss">
 form {
   width: 20.5rem;
+  max-width: 370px;
   margin-top: 1.5rem;
 
   input,

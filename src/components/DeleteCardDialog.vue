@@ -37,7 +37,7 @@ dialog {
   align-items: center;
   position: fixed;
   top: 20vh;
-  left: 40%;
+  left: 38%;
   width: 22rem;
   z-index: 100;
   border-radius: 12px;
@@ -68,5 +68,22 @@ button {
 .cancel {
   background-color: #222;
   color: white;
+}
+@media (max-width: 450px) {
+  dialog {
+    width: 16rem;
+    left: 15%;
+  }
+}
+@media (min-width: 450px) and (max-width: 767px) {
+  dialog {
+    width: 16rem;
+    left: 25%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1190px) {
+  dialog {
+    left: 30%;
+  }
 }
 </style>
