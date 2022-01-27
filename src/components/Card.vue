@@ -76,9 +76,10 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 370px;
-  height: 240px;
-  padding: 0.5rem 1rem;
+  width: 350px;
+  height: 230px;
+  margin: 0 auto;
+  padding: 0.2rem 1rem 0.7rem;
   background: #d0d0d0;
   box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.94);
   border-radius: 8px;

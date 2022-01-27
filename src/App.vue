@@ -92,7 +92,8 @@ h3 {
   font-family: "Source Sans Pro", sans-serif;
 }
 #app {
-  width: 24rem;
+  width: 23rem;
+  min-width: 355px;
   margin-top: 2rem;
   display: flex;
   justify-content: center;
@@ -100,9 +101,9 @@ h3 {
   padding: 2rem;
   border-radius: 5px;
 }
-@media (max-width: 400px) {
-  #app {
-    width: 21.5rem;
-  }
-}
+// @media (max-width: 400px) {
+//   #app {
+//     width: ;
+//   }
+// }
 </style>

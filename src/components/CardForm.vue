@@ -150,7 +150,8 @@ export default {
 <style scoped lang="scss">
 form {
   width: 20.5rem;
-  max-width: 370px;
+  max-width: 350px;
+  margin: 0 auto;
   margin-top: 1.5rem;
 
   input,
